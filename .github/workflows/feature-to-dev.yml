@@ -36,6 +36,7 @@ jobs:
   update-to-testing:
     needs: [extract-task, build]
     if: |
+      always() &&
       needs.build.result == 'success' &&
       needs.extract-task.outputs.has_task == 'true'
     runs-on: ubuntu-latest
@@ -53,6 +54,7 @@ jobs:
   update-to-fixing:
     needs: [extract-task, build]
     if: |
+      always() &&
       needs.build.result == 'failure' &&
       needs.extract-task.outputs.has_task == 'true'
     runs-on: ubuntu-latest
